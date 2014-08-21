@@ -1,9 +1,8 @@
 module.exports = function(grunt) {
-
+	var setting = require('./app.json');
 	// Project configuration.
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
-		setting: grunt.file.readJSON('app.json'),
 		clean: {
 			build: ['styles', 'styles', 'build']
 		},
@@ -17,11 +16,12 @@ module.exports = function(grunt) {
 				},
 
 				files: {
-					"build/js/templates.js": ["templates/**/*.hbs"]
-					//(function getTemplate(files) {
-					//console.log(this.setting);
-					//	return ['<%= setting.pages[0].template %>'];
-					//})()
+					"build/js/templates.js": (function getTemplate(files) {
+						console.log(setting);
+						//return ['<%= setting.pages[0].template %>'];
+						return ["templates/**/*.hbs"];
+					})()
+
 				}
 			}
 		},
